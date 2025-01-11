@@ -1,4 +1,14 @@
-# Velastria
+<div align=center>
+
+  <a href="https://github.com/parazeeknova/velastria">
+    <img src="./assets/velastria-banner-rounded.png" alt="Velastria" width="95%">
+  </a>
+
+</div>
+
+<br>
+
+--- 
 
 #### _<div align="left"><sub>// Project Overview</sub></div>_
 
@@ -55,9 +65,5 @@ bun run dev
 <p align="left">
 <strong>Velastria</strong> is licensed under the <a href="https://github.com/parazeeknova/velastria/blob/main/LICENSE">AGPL License</a>.
 </p>
-
-<div align="right">
-  <a href="#-project-overview"><kbd> <br> 🡅 <br> </kbd></a>
-</div>
 
 ---
