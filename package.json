@@ -7,8 +7,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "ultracite lint",
-    "format": "ultracite format"
+    "lint": "biome lint --write .",
+    "format": "biome format --write ."
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
