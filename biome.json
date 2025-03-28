@@ -2,6 +2,10 @@
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "extends": ["ultracite"],
   "files": {
-    "ignore": [".vscode/extensions.json", ".vscode/settings.json"]
+    "ignore": [
+      ".vscode/extensions.json",
+      ".vscode/settings.json",
+      "./src/components/ui/*"
+    ]
   }
 }
