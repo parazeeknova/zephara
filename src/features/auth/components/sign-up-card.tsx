@@ -16,6 +16,7 @@ interface SignUpCardProps {
 
 export const SignUpCard = ({ setState }: SignUpCardProps) => {
   const { signIn } = useAuthActions();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,7 +31,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
       return;
     }
     setPending(true);
-    signIn('password', { email, password, flow: 'signUp' })
+    signIn('password', { name, email, password, flow: 'signUp' })
       .catch(() => {
         setError('Something went wrong');
       })
@@ -99,6 +100,27 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
       </div>
 
       <form onSubmit={onPasswordSignUp} className="space-y-3">
+        <div className="space-y-1">
+          <label htmlFor="name" className="mb-1 text-white text-xs">
+            Name*
+          </label>
+          <motion.div whileFocus={{ scale: 1.01 }}>
+            <Input
+              id="name"
+              disabled={pending}
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck="false"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your name"
+              type="text"
+              required
+              className="border-[#333] bg-transparent py-5 text-white transition-all duration-200 placeholder:text-neutral-600 focus:border-[#555]"
+            />
+          </motion.div>
+        </div>
+
         <div className="space-y-1">
           <label htmlFor="email" className="mb-1 text-white text-xs">
             Email*
