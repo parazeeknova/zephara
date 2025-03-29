@@ -5,7 +5,8 @@
     "ignore": [
       ".vscode/extensions.json",
       ".vscode/settings.json",
-      "./src/components/ui/*"
+      "./src/components/ui/*",
+      "./convex/_generated/*"
     ]
   }
 }

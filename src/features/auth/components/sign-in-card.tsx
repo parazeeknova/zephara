@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
+import { useAuthActions } from '@convex-dev/auth/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa6';
@@ -12,8 +13,13 @@ interface SignInCardProps {
 }
 
 export const SignInCard = ({ setState }: SignInCardProps) => {
+  const { signIn } = useAuthActions();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleProviderSignIn = (value: 'github' | 'google') => {
+    signIn(value);
+  };
 
   return (
     <div className="w-full space-y-4">
@@ -37,7 +43,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
       <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
         <Button
-          onClick={() => {}}
+          onClick={() => handleProviderSignIn('github')}
           variant="outline"
           size="default"
           className="relative w-full justify-center border-[#333] bg-transparent py-5 text-white transition-colors duration-200 hover:bg-[#222] hover:text-white"
