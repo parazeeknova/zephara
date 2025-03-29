@@ -40,8 +40,11 @@ bunx convex dev # This will start the convex dev server
 # For proper Authentication, you need to set up the auth provider. You can do this by running the following command:
 # More details for this can be found at: https://labs.convex.dev/auth/config/oauth/github
 # To set up the auth provider, you need to create a GitHub OAuth app and get the client ID and secret. 
-bunx convex env set AUTH_GITHUB_ID=<your_github_id> # (optional)
-bunx convex env set AUTH_GITHUB_SECRET=<your_github_secret> # (optional)
+bunx convex env set AUTH_GITHUB_ID <your_github_id> # (optional)
+bunx convex env set AUTH_GITHUB_SECRET <your_github_secret> # (optional)
+# Same for the Google OAuth app:
+bunx convex env set AUTH_GOOGLE_ID <your_google_id> # (optional)
+bunx convex env set AUTH_GOOGLE_SECRET <your_google_secret> # (optional)
 
 # Start the development server finally
 # This will start the zephara dev server

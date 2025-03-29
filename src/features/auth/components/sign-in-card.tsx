@@ -16,19 +16,24 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
   const { signIn } = useAuthActions();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [pending, setPending] = useState(false);
 
-  const handleProviderSignIn = (value: 'github' | 'google') => {
-    signIn(value);
+  const onProviderSignIn = (value: 'github' | 'google') => {
+    setPending(true);
+    signIn(value).finally(() => {
+      setPending(false);
+    });
   };
 
   return (
     <div className="w-full space-y-4">
       <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
         <Button
-          onClick={() => {}}
+          onClick={() => onProviderSignIn('google')}
           variant="outline"
           size="default"
           className="relative w-full justify-center border-[#333] bg-transparent py-5 text-white transition-colors duration-200 hover:bg-[#222] hover:text-white"
+          disabled={pending}
         >
           <motion.div
             initial={{ rotate: 0 }}
@@ -43,10 +48,11 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
       <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
         <Button
-          onClick={() => handleProviderSignIn('github')}
+          onClick={() => onProviderSignIn('github')}
           variant="outline"
           size="default"
           className="relative w-full justify-center border-[#333] bg-transparent py-5 text-white transition-colors duration-200 hover:bg-[#222] hover:text-white"
+          disabled={pending}
         >
           <motion.div
             initial={{ rotate: 0 }}
@@ -72,6 +78,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
           </label>
           <motion.div whileFocus={{ scale: 1.01 }}>
             <Input
+              disabled={pending}
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -89,6 +96,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
           </label>
           <motion.div whileFocus={{ scale: 1.01 }}>
             <Input
+              disabled={pending}
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -104,6 +112,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
           <Button
             type="submit"
             className="w-full bg-neutral-700 text-white transition-all duration-200 hover:bg-neutral-600"
+            disabled={pending}
           >
             Sign in
           </Button>
@@ -117,6 +126,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
           whileTap={{ scale: 0.95 }}
           onClick={() => setState('signUp')}
           className="font-medium text-sm text-white transition-all duration-200 hover:underline"
+          disabled={pending}
         >
           Create account →
         </motion.button>
