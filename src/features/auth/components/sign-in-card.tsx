@@ -3,6 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { useAuthActions } from '@convex-dev/auth/react';
 import { motion } from 'framer-motion';
+import { TriangleAlert } from 'lucide-react';
+import type React from 'react';
 import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa6';
 import { FcGoogle } from 'react-icons/fc';
@@ -17,6 +19,19 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [pending, setPending] = useState(false);
+  const [error, setError] = useState('');
+
+  const onPasswordSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setPending(true);
+    signIn('password', { email, password, flow: 'signIn' })
+      .catch(() => {
+        setError('Invalid email or password');
+      })
+      .finally(() => {
+        setPending(false);
+      });
+  };
 
   const onProviderSignIn = (value: 'github' | 'google') => {
     setPending(true);
@@ -27,6 +42,12 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
   return (
     <div className="w-full space-y-4">
+      {!!error && (
+        <div className="mb-6 flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-destructive text-sm">
+          <TriangleAlert className="size-5" />
+          <p>{error}</p>
+        </div>
+      )}
       <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
         <Button
           onClick={() => onProviderSignIn('google')}
@@ -71,7 +92,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
         <Separator className="flex-1 bg-[#333]" />
       </div>
 
-      <form className="space-y-3">
+      <form onSubmit={onPasswordSignIn} className="space-y-3">
         <div className="space-y-1">
           <label htmlFor="email" className="mb-1 text-white text-xs">
             Email*
@@ -79,6 +100,10 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
           <motion.div whileFocus={{ scale: 1.01 }}>
             <Input
               disabled={pending}
+              autoComplete="email"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck="false"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

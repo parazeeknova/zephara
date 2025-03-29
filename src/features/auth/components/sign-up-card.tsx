@@ -1,7 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
+import { useAuthActions } from '@convex-dev/auth/react';
 import { motion } from 'framer-motion';
+import { TriangleAlert } from 'lucide-react';
+import type React from 'react';
 import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa6';
 import { FcGoogle } from 'react-icons/fc';
@@ -12,15 +15,49 @@ interface SignUpCardProps {
 }
 
 export const SignUpCard = ({ setState }: SignUpCardProps) => {
+  const { signIn } = useAuthActions();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState('');
+
+  const onPasswordSignUp = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    setPending(true);
+    signIn('password', { email, password, flow: 'signUp' })
+      .catch(() => {
+        setError('Something went wrong');
+      })
+      .finally(() => {
+        setPending(false);
+      });
+  };
+
+  const onProviderSignUp = (value: 'github' | 'google') => {
+    setPending(true);
+    signIn(value).finally(() => {
+      setPending(false);
+    });
+  };
 
   return (
     <div className="w-full space-y-4">
+      {!!error && (
+        <div className="mb-6 flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-destructive text-sm">
+          <TriangleAlert className="size-5" />
+          <p>{error}</p>
+        </div>
+      )}
       <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
         <Button
-          onClick={() => {}}
+          onClick={() => onProviderSignUp('google')}
+          disabled={pending}
           variant="outline"
           size="default"
           className="relative w-full justify-center border-[#333] bg-transparent py-5 text-white transition-colors duration-200 hover:bg-[#222] hover:text-white"
@@ -38,7 +75,8 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
 
       <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}>
         <Button
-          onClick={() => {}}
+          onClick={() => onProviderSignUp('github')}
+          disabled={pending}
           variant="outline"
           size="default"
           className="relative w-full justify-center border-[#333] bg-transparent py-5 text-white transition-colors duration-200 hover:bg-[#222] hover:text-white"
@@ -60,7 +98,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
         <Separator className="flex-1 bg-[#333]" />
       </div>
 
-      <form className="space-y-3">
+      <form onSubmit={onPasswordSignUp} className="space-y-3">
         <div className="space-y-1">
           <label htmlFor="email" className="mb-1 text-white text-xs">
             Email*
@@ -68,6 +106,11 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
           <motion.div whileFocus={{ scale: 1.01 }}>
             <Input
               id="email"
+              disabled={pending}
+              autoComplete="email"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck="false"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
@@ -85,6 +128,11 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
           <motion.div whileFocus={{ scale: 1.01 }}>
             <Input
               id="password"
+              disabled={pending}
+              autoComplete="new-password"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck="false"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"
@@ -101,6 +149,11 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
           </label>
           <motion.div whileFocus={{ scale: 1.01 }}>
             <Input
+              disabled={pending}
+              autoComplete="new-password"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck="false"
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -114,6 +167,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
 
         <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
           <Button
+            disabled={pending}
             type="submit"
             className="w-full bg-neutral-700 text-white transition-all duration-200 hover:bg-neutral-600"
           >
@@ -125,6 +179,7 @@ export const SignUpCard = ({ setState }: SignUpCardProps) => {
       <div className="flex items-center justify-center gap-2 pt-4">
         <p className="text-[#777] text-sm">Already have an account?</p>
         <motion.button
+          disabled={pending}
           whileHover={{ scale: 1.05, x: -3 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setState('signIn')}
