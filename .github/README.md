@@ -57,5 +57,3 @@ bun run dev
 <p align="left">
 <strong>Zephara</strong> is licensed under the <a href="https://github.com/parazeeknova/velastria/blob/main/LICENSE">AGPL License</a>.
 </p>
-
---- ;
