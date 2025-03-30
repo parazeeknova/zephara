@@ -35,6 +35,11 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <script
+            defer
+            src="https://analytics-umami.zephyyrr.in/script.js"
+            data-website-id="3dfa1132-3a2a-4a46-bce3-993b5794c47b"
+          />
           <ConvexClientProvider>
             <Toaster />
             <Modals />
