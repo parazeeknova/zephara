@@ -5,6 +5,8 @@ import { ConvexClientProvider } from '@/components/convex-client-provider';
 import { Modals } from '@/components/modals';
 import { Toaster } from '@/components/ui/sonner';
 import { ConvexAuthNextjsServerProvider } from '@convex-dev/auth/nextjs/server';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type React from 'react';
 
 const geistSans = Geist({
@@ -37,6 +39,8 @@ export default function RootLayout({
             <Toaster />
             <Modals />
             {children}
+            <SpeedInsights />
+            <Analytics />
           </ConvexClientProvider>
         </body>
       </html>
