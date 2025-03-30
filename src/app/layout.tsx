@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './styles/globals.css';
 import { ConvexClientProvider } from '@/components/convex-client-provider';
+import { JotaiProvider } from '@/components/jotai-provider';
 import { Modals } from '@/components/modals';
 import { Toaster } from '@/components/ui/sonner';
 import { ConvexAuthNextjsServerProvider } from '@convex-dev/auth/nextjs/server';
@@ -41,9 +42,11 @@ export default function RootLayout({
             data-website-id="3dfa1132-3a2a-4a46-bce3-993b5794c47b"
           />
           <ConvexClientProvider>
-            <Toaster />
-            <Modals />
-            {children}
+            <JotaiProvider>
+              <Toaster />
+              <Modals />
+              {children}
+            </JotaiProvider>
             <SpeedInsights />
             <Analytics />
           </ConvexClientProvider>
