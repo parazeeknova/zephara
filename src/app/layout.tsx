@@ -46,8 +46,8 @@ export default function RootLayout({
               <Toaster />
               <Modals />
               {children}
+              <SpeedInsights />
             </JotaiProvider>
-            <SpeedInsights />
             <Analytics />
           </ConvexClientProvider>
         </body>
