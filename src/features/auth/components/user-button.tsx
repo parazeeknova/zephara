@@ -37,9 +37,13 @@ export const UserButton = () => {
       <DropdownMenuTrigger className="group relative outline-none">
         <div className="relative">
           <div className="-inset-0.5 absolute rounded-full bg-gradient-to-r from-gray-400 to-gray-600 opacity-0 blur-sm transition duration-200 group-hover:opacity-75 dark:from-gray-200 dark:to-white" />
-          <Avatar className="relative size-10 border-2 border-background shadow-md">
-            <AvatarImage alt={name} src={image} className="object-cover" />
-            <AvatarFallback className="bg-gradient-to-br from-gray-200 to-gray-300 font-medium text-foreground dark:from-gray-700 dark:to-gray-800">
+          <Avatar className="relative size-10 rounded-md border-2 border-background shadow-md">
+            <AvatarImage
+              alt={name}
+              src={image}
+              className="rounded-md object-cover"
+            />
+            <AvatarFallback className="rounded-md bg-gradient-to-br from-gray-200 to-gray-300 font-medium text-foreground dark:from-gray-700 dark:to-gray-800">
               <Image
                 priority
                 width={100}
