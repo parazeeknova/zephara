@@ -68,7 +68,7 @@ export const AuthScreen = () => {
 
         <motion.div
           className="relative hidden h-full w-[65%] bg-center bg-cover md:block"
-          style={{ backgroundImage: "url('/auth-bg-signin.jpg')" }}
+          style={{ backgroundImage: "url('/auth-bg-signin.png')" }}
           initial={false}
           animate={{
             opacity: state === 'signIn' ? 1 : 0,
@@ -125,7 +125,7 @@ export const AuthScreen = () => {
 
         <motion.div
           className="absolute left-0 hidden h-full w-[65%] bg-center bg-cover md:block"
-          style={{ backgroundImage: "url('/auth-bg-signup.jpg')" }}
+          style={{ backgroundImage: "url('/auth-bg-signup.png')" }}
           initial={false}
           animate={{
             opacity: state === 'signUp' ? 1 : 0,
