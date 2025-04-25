@@ -75,14 +75,8 @@ const Editor = ({
       modules: {
         toolbar: [
           ['bold', 'italic', 'underline', 'strike', 'code', 'blockquote'],
-          ['link', 'image'],
-          [
-            { list: 'ordered' },
-            { list: 'bullet' },
-            { indent: '-1' },
-            { indent: '+1' },
-          ],
-          [{ align: [] }],
+          ['link'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
         ],
         keyboard: {
           bindings: {
