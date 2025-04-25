@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ConvexAuthNextjsServerProvider } from '@convex-dev/auth/nextjs/server';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import type React from 'react';
 
 const geistSans = Geist({
@@ -45,7 +46,7 @@ export default function RootLayout({
             <JotaiProvider>
               <Toaster />
               <Modals />
-              {children}
+              <NuqsAdapter>{children}</NuqsAdapter>
               <SpeedInsights />
             </JotaiProvider>
             <Analytics />
