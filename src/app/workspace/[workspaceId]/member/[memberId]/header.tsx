@@ -30,7 +30,7 @@ export const Header = ({
               width={100}
               height={100}
               src="/avatar-placeholder.png"
-              alt="Avatar"
+              alt={memberName}
               className="h-full w-full object-cover"
             />
           </AvatarFallback>

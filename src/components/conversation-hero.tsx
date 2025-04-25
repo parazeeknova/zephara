@@ -21,7 +21,7 @@ export const ConversationHero = ({
               width={100}
               height={100}
               src="/avatar-placeholder.png"
-              alt="Avatar"
+              alt={name}
               className="h-full w-full object-cover"
             />
           </AvatarFallback>
