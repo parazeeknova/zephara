@@ -47,9 +47,9 @@ export default function RootLayout({
               <Toaster />
               <Modals />
               <NuqsAdapter>{children}</NuqsAdapter>
-              <SpeedInsights />
             </JotaiProvider>
             <Analytics />
+            <SpeedInsights />
           </ConvexClientProvider>
         </body>
       </html>
