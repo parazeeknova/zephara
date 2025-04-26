@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@auth/core": "^0.38.0",
-    "@convex-dev/auth": "^0.0.80",
+    "@convex-dev/auth": "^0.0.82",
     "@emoji-mart/data": "^1.2.1",
     "@emoji-mart/react": "^1.1.1",
     "@hookform/resolvers": "^4.1.3",
