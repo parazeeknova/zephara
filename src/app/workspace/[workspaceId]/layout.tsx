@@ -5,6 +5,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
+import { Profile } from '@/features/members/components/profile';
 import { Thread } from '@/features/messages/components/thread';
 import { usePanel } from '@/hooks/use-panel';
 import { Loader2 } from 'lucide-react';
@@ -19,8 +20,8 @@ interface WorkspaceIdLayoutProps {
 }
 
 const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
-  const { parentMessageId, onClose } = usePanel();
-  const showPanel = !!parentMessageId;
+  const { parentMessageId, onClose, profileMemberId } = usePanel();
+  const showPanel = !!parentMessageId || !!profileMemberId;
 
   return (
     <div className="h-full">
@@ -44,6 +45,12 @@ const WorkspaceIdLayout = ({ children }: WorkspaceIdLayoutProps) => {
                 {parentMessageId ? (
                   <Thread
                     messageId={parentMessageId as Id<'messages'>}
+                    onClose={onClose}
+                  />
+                  // biome-ignore lint/nursery/noNestedTernary:
+                ) : profileMemberId ? (
+                  <Profile
+                    memberId={profileMemberId as Id<'members'>}
                     onClose={onClose}
                   />
                 ) : (

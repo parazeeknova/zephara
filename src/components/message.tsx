@@ -75,8 +75,9 @@ export const Message = ({
   threadImage,
   threadName,
   threadTimestamp,
+  // biome-ignore lint/complexity/noExcessiveCognitiveComplexity:
 }: MessageProps) => {
-  const { parentMessageId, onOpenMessage, onClose } = usePanel();
+  const { parentMessageId, onOpenMessage, onClose, onOpenProfile } = usePanel();
 
   const [ConfirmDialog, confirm] = useConfirm(
     'Delete Message',
@@ -90,7 +91,7 @@ export const Message = ({
   const { mutate: toggleReaction, isPending: isTogglingReaction } =
     useToggleReaction();
 
-  const isPending = isUpdatingMessage;
+  const isPending = isUpdatingMessage || isTogglingReaction;
 
   const handleReaction = (value: string) => {
     toggleReaction(
@@ -219,8 +220,8 @@ export const Message = ({
         )}
       >
         <div className="flex items-start gap-2">
-          <button type="button">
-            <Avatar>
+          <button type="button" onClick={() => onOpenProfile(memberId)}>
+            <Avatar className="cursor-pointer">
               <AvatarImage src={authorImage} />
               <AvatarFallback className="bg-gradient-to-br from-gray-200 to-gray-300 font-medium text-foreground dark:from-gray-700 dark:to-gray-800">
                 <Image
@@ -248,9 +249,9 @@ export const Message = ({
             <div className="flex w-full flex-col overflow-hidden">
               <div className="text-sm">
                 <button
-                  onClick={() => {}}
+                  onClick={() => onOpenProfile(memberId)}
                   type="button"
-                  className="text-bold text-primary hover:underline"
+                  className="cursor-pointer text-bold text-primary hover:underline"
                 >
                   {authorName}
                 </button>
