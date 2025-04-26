@@ -11,7 +11,7 @@
     "format": "biome format --write ."
   },
   "dependencies": {
-    "@auth/core": "^0.38.0",
+    "@auth/core": "^0.39.0",
     "@convex-dev/auth": "^0.0.80",
     "@emoji-mart/data": "^1.2.1",
     "@emoji-mart/react": "^1.1.1",
