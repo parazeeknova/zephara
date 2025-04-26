@@ -146,9 +146,9 @@ const Editor = ({
   };
 
   // biome-ignore lint/suspicious/noExplicitAny: emoji is any type
-  const onEmojiSelect = (emoji: any) => {
+  const onEmojiSelect = (emojiValue: any) => {
     const quill = quillRef.current;
-    quill?.insertText(quill?.getSelection()?.index || 0, emoji.native);
+    quill?.insertText(quill?.getSelection()?.index || 0, emojiValue);
   };
 
   const isEmpty = !image && text.replace(/<(.|\n)*?>/g, '').trim().length === 0;

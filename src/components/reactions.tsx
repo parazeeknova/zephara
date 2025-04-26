@@ -54,8 +54,7 @@ export const Reactions = ({ data, onChange }: ReactionProps) => {
       ))}
       <EmojiPopover
         hint="Add reaction"
-        // @ts-expect-error
-        onEmojiSelect={(emoji) => onChange(emoji.native)}
+        onEmojiSelect={(emoji) => onChange(emoji)}
       >
         <button
           type="button"
